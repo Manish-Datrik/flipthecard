@@ -1,4 +1,4 @@
-Memory Match – Card Flip Game
+Memory Match – Card Flip Game  https://manish-datrik.github.io/flipthecard/
 
 I built this project as a simple game to test memory and focus. The idea is straightforward: flip cards, remember their positions, and match the pairs. It’s easy to understand but gets challenging as you try to remember more cards.
 
