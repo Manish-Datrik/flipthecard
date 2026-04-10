@@ -6,32 +6,65 @@
     
     <title>Flipping Cards</title>
     <style>
-     body {
-        background-color: grey;
-        padding: 50px;
-    }   
-    h1{
-        font-style: italic;
-        font-size: large;
-        text-decoration: underline;
-
-    }
-
-    p {
-        text-decoration: none;
-        font-size: medium;
-
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #eef2f7;
+            color: #243b55;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .wrapper {
+            background: white;
+            border-radius: 16px;
+            padding: 36px 32px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
+            text-decoration: underline;
+            letter-spacing: 0.02em;
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            color: #4a5568;
+        }
+        .btn-play {
+            display: inline-block;
+            background-color: #2b6cb0;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .btn-play:hover {
+            background-color: #2c5282;
+        }
     </style>
-    
-
 </head>
 <body>
-    <h1>Flipping Cards</h1>  
-    <p>Here in this game, we will be testing your memomry, how much it can remember.</p>
-    <p>Think smart, select the correct one</p>
-
-    <button  type="button" id="play" onclick="window.location.href='singlep.html'">play</button>
-    
+    <div class="wrapper">
+        <h1>Flipping Cards</h1>
+        <p>Test your memory by finding the matching cards. Flip two cards at a time and remember their positions.</p>
+        <p>Use your brain, stay focused, and match all pairs correctly.</p>
+        <button type="button" class="btn-play" id="play" onclick="window.location.href='singlep.html'">Play</button>
+    </div>
 </body>
 </html>

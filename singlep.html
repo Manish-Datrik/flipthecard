@@ -47,13 +47,35 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #4285F4;
+            background-color: rgba(66, 133, 244, 0.8);
             z-index: 10;
+            align-items: center;
+            justify-content: center;
         }
+        .overlay.active {
+            display: flex;
+        }
+        .pop-text {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .pop-text h1 {
+            color: darkblue;
+            margin-bottom: 15px;
+        }
+        .pop-text p {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
     </style>
 </head>
 <body>
-    <div class="t">Timer:<span id="sec">0</span></div>
+    <div class="t">Timer:<span id="sec">0</span></div><br><br>
         <h1>Flipping Cards</h1>
         <div class="all">
         <div class="card" id="1"></div>
@@ -75,10 +97,93 @@
             <div class="pop-text">
                 <h1>You have done it...!</h1>
                 <p id="time"></p>
-                    <button id="again">Try Again...</button>
+                    <button style="margin-left: 5px; margin-top: 10px; background-color: #F0ECCB; border: 2.5px solid #A4987E; height: 30px; width: 100px;" class="btn" onclick="window.location.reload()">Try Again...</button>
                 </div>
         </div>
-        
+        <script>
+            let seconds = 0;
+            let timeri = null;
+            function startT(){
+                if(timeri) {
+                    return;
+                }
+                timeri = setInterval(()=>{
+                    seconds++;
+                    document.getElementById('sec').innerText=Math.floor(seconds/60)+'min '+seconds%60+' sec';
+                },1000);
+
+
+            }
+            function stopT(){
+                clearInterval(timeri);
+                timeri=null;
+            }
+            let a =[];
+            let temp = [];
+            let pairs=[];
+            let turns=[];
+            let i = 1;
+            // Create pairs: each image 1-7 appears twice
+            for(let j = 0; j < 7; j++){
+                a[j*2] = j+1;
+                a[j*2+1] = j+1;
+            }
+            // Shuffle the array
+            function shuffle(arr){
+                for(let i = arr.length - 1; i > 0; i--){
+                    let j = Math.floor(Math.random() * (i + 1));
+                    let temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+                return arr;
+            }
+            a = shuffle(a);
+            function verify(){
+                if(turns.length===2){
+                    if(a[turns[0]-1]==a[turns[1]-1]){
+                        pairs.push(turns[0]);
+                        pairs.push(turns[1]);
+
+                    }else{
+                        let a1 = document.getElementById(String(turns[0]));
+                        let a2 = document.getElementById(String(turns[1]));
+                        i = 0;
+                        setTimeout(function(){
+                            a1.style.backgroundImage='url("card.jpeg")';
+                            a2.style.backgroundImage='url("card.jpeg")';
+                            i =1;
+
+                        },600);
+                    }
+                    turns.pop();
+                    turns.pop();
+                    if(pairs.length===14){
+                        stopT();
+                        let tt = document.getElementById('time');
+                        tt.innerText='Successfully done in '+Math.floor(seconds/60)+'min '+seconds%60+' sec';
+                        const overlay = document.getElementById('po');
+                        overlay.classList.add('active');
+
+                    }
+                }
+            }
+            let a1 = document.querySelectorAll(".card");
+            a1.forEach((all)=>{
+                all.addEventListener("click",function() {
+                    startT();
+                    let aa = Number(all.getAttribute("id"));
+                    if(!pairs.includes(aa)&& i == 1){
+                        turns.push(aa);
+                        let ab = document.getElementById(all.getAttribute("id"));
+                        let ac = a[aa-1] + '.jpg';
+                        ab.style.backgroundImage = `url("${ac}")`;
+                        verify();
+                    }
+                })
+            })
+
+        </script>
     
 </body>
 </html>
